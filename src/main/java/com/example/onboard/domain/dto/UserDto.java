@@ -17,7 +17,6 @@ public class UserDto {
 
     @NotNull(message = "emailAddress Should Not Be Null")
     @Size(min = 3, max = 254)
-
     @Email(message = "Please insert a valid emailAddress.")
     private String email;
 

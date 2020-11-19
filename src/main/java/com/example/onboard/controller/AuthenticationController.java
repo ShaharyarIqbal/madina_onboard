@@ -56,9 +56,7 @@ public class AuthenticationController {
     public JwtAuthenticationResponse authenticateUser(@RequestBody AuthenticationRequest authenticationRequest) {
         Optional<UserEntity> user =  userService.findByUserName(authenticationRequest.getUserName());
         try {
-            if (user.isPresent() && user.get().getIsLocked() == 1) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, SpringSecurity.ACCOUNT_LOCKED.getValue());
-            }
+
             if (user.isPresent() && user.get().getStatus() == UserStatus.INACTIVE) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, SpringSecurity.ACCOUNT_INACTIVE.getValue());
             }
