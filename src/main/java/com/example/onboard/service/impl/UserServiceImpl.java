@@ -1,9 +1,11 @@
 package com.example.onboard.service.impl;
 
 import com.example.onboard.constant.UserStatus;
+import com.example.onboard.constant.ValidationMessage;
 import com.example.onboard.domain.dto.UserDto;
 import com.example.onboard.domain.model.security.UserEntity;
 import com.example.onboard.domain.repository.UserRepository;
+import com.example.onboard.infrastructure.exception.MadinaAppException;
 import com.example.onboard.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityExistsException;
 import java.util.Optional;
 
 @Slf4j
@@ -41,6 +44,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(UserDto userDto) {
+        Optional<UserEntity> user = userRepository.findByUserNameOrEmail(userDto.getUserName(),userDto.getEmail());
+        if(user.isPresent()){
+            throw new EntityExistsException(ValidationMessage.USER_ALREADY_EXISTS.name());
+        }
         UserEntity userEntity = mapper.map(userDto,UserEntity.class);
         userEntity.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userEntity.setStatus(UserStatus.ACTIVE);
