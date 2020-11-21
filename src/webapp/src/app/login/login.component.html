@@ -1,0 +1,70 @@
+<video autoplay muted loop id="myVideo">
+  <source src="assets/masjid4.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+<div class="logo">
+  <img src="assets/madinaapps-logo.png" height="100px" width="300px">
+</div>
+
+<div *ngIf="login" class="content">
+
+  <h3 class="heading">Login</h3>
+  <form>
+    <div class="form-group">
+      <input id="transparent" type="text" class="form-control" [(ngModel)]="loginUserDetails.userName" placeholder="Email *" name="username" />
+    </div>
+    <div class="form-group">
+      <input id="transparent" type="password" class="form-control" [(ngModel)]="loginUserDetails.password" placeholder="Password *" name="password" />
+    </div>
+    <div class="form-group">
+      <button class="login100-form-btn" (click)="loginUser()">
+        Login
+      </button>
+    </div>
+    <div class="form-group">
+      <a  (click)="goToRegister()" class="link">Register?</a>
+    </div>
+  </form>
+
+</div>
+
+<div *ngIf="register" >
+  <div class="row">
+    <div class="col-md-6" class="content1">
+      <h3 class="heading">Register</h3>
+      <form>
+        
+        <div class="form-group">
+          <input id="transparent" type="text" class="form-control" [(ngModel)]="user.userName" placeholder="Username *" name="Username" />
+        </div>
+        <div class="form-group">
+          <input id="transparent" type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password *" name="Password" />
+        </div>
+        <div class="form-group">
+          <input id="transparent" type="email" class="form-control" [(ngModel)]="user.email" placeholder="Email *" name="Email" />
+        </div>
+        <div class="form-group">
+          <input id="transparent" type="text" class="form-control" [(ngModel)]="user.firstName" placeholder="First Name *" name="FirstName" />
+        </div>
+        <!-- <div class="form-group">
+          <input id="transparent" type="text" class="form-control" placeholder="Last Name *" value="" />
+        </div> -->
+        <div class="form-group">
+          <input id="transparent" type="number" class="form-control" [(ngModel)]="user.age" placeholder="Age *" name="Age" />
+        </div>
+        <div class="form-group">
+          <button class="login100-form-btn" (click)= "registerUser()">
+            Register
+          </button>
+        </div>
+        <div class="form-group">
+          <a class="link" (click)="goToLogin()">Login?</a>
+        </div>
+      </form>
+
+      
+    </div>
+  </div>
+ 
+
+</div>

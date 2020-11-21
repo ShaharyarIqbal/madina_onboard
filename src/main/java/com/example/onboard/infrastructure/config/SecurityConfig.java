@@ -1,7 +1,6 @@
 package com.example.onboard.infrastructure.config;
 
 import com.example.onboard.infrastructure.security.JwtAuthenticationEntryPoint;
-import com.example.onboard.service.impl.CustomDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -60,6 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/swagger-ui/**");
+        web.ignoring().antMatchers("/swagger-resources/**");
+        web.ignoring().antMatchers("/api-docs/**");
         web.expressionHandler(new DefaultWebSecurityExpressionHandler() {
             @Override
             protected SecurityExpressionOperations createSecurityExpressionRoot(Authentication authentication, FilterInvocation fi) {

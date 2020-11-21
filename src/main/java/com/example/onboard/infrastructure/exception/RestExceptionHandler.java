@@ -23,6 +23,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.persistence.EntityExistsException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -175,9 +176,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(new ApiError(BAD_REQUEST,ex.getMessage(), ex));
     }
 
-    @ExceptionHandler(javax.persistence.EntityExistsException.class)
-    protected ResponseEntity<Object> handleEntityExistFound(javax.persistence.EntityNotFoundException ex) {
-        return buildResponseEntity(new ApiError(HttpStatus.FORBIDDEN, ex));
+    @ExceptionHandler(EntityExistsException.class)
+    protected ResponseEntity<Object> handleEntityExistFound(EntityExistsException ex) {
+        return buildResponseEntity(new ApiError(HttpStatus.FORBIDDEN, ex.getMessage(),ex));
     }
 
     /**
@@ -230,7 +231,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         } else {
             errMsg = gson.toJson(apiError.getMessage());
         }
-        return ResponseEntity.status(apiError.getStatus()).header("err-msg", errMsg).build();
+        return ResponseEntity.status(apiError.getStatus()).body(errMsg);
     }
 
 }

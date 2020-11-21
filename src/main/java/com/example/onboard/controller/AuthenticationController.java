@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/v1/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthenticationController {
