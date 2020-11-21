@@ -5,8 +5,6 @@ package com.example.onboard.service;
 import com.example.onboard.domain.dto.UserDto;
 import com.example.onboard.domain.model.security.UserEntity;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public interface UserService {

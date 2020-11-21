@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class CustomUser implements UserDetails {
@@ -34,13 +36,13 @@ public class CustomUser implements UserDetails {
 
 
     public static CustomUser create(UserEntity user) {
-//        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
-//                new SimpleGrantedAuthority(role.getName().name())
-//        ).collect(Collectors.toList());
-        Collection<GrantedAuthority> grantedAuthoritiesList = new ArrayList<>();
-        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("SYSTEMADMIN");
-        grantedAuthoritiesList.add(grantedAuthority);
-        return new CustomUser(user.getId(), user.getUserName(), user.getPassword(), grantedAuthoritiesList);
+        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
+                new SimpleGrantedAuthority(role.getName().name())
+        ).collect(Collectors.toList());
+//        Collection<GrantedAuthority> grantedAuthoritiesList = new ArrayList<>();
+//        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ADMIN");
+//        grantedAuthoritiesList.add(grantedAuthority);
+        return new CustomUser(user.getId(), user.getUserName(), user.getPassword(), authorities);
 
     }
 
