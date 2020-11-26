@@ -19,7 +19,6 @@ public class CustomUser implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public CustomUser(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
-
         this.id = id;
         this.username = username;
         this.password = password;
@@ -28,7 +27,6 @@ public class CustomUser implements UserDetails {
 
 
     public CustomUser(Long id, String username,  Collection<? extends GrantedAuthority> authorities) {
-
         this.id = id;
         this.username = username;
         this.authorities = authorities;
@@ -37,11 +35,8 @@ public class CustomUser implements UserDetails {
 
     public static CustomUser create(UserEntity user) {
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
-                new SimpleGrantedAuthority(role.getName().name())
-        ).collect(Collectors.toList());
-//        Collection<GrantedAuthority> grantedAuthoritiesList = new ArrayList<>();
-//        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ADMIN");
-//        grantedAuthoritiesList.add(grantedAuthority);
+                new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());
+
         return new CustomUser(user.getId(), user.getUserName(), user.getPassword(), authorities);
 
     }

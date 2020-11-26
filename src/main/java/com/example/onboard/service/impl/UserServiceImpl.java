@@ -6,10 +6,13 @@ import com.example.onboard.constant.ValidationMessage;
 import com.example.onboard.domain.dto.UserDto;
 import com.example.onboard.domain.model.security.Role;
 import com.example.onboard.domain.model.security.UserEntity;
+import com.example.onboard.domain.repository.RoleRepository;
 import com.example.onboard.domain.repository.UserRepository;
 import com.example.onboard.infrastructure.exception.MadinaAppException;
 import com.example.onboard.service.UserService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -28,13 +31,16 @@ import java.util.Set;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
+    UserRepository userRepository;
 
-    private final PasswordEncoder passwordEncoder;
+    RoleRepository roleRepository;
 
-    private final ModelMapper mapper;
+    PasswordEncoder passwordEncoder;
+
+    ModelMapper mapper;
 
 
     @Override
@@ -52,9 +58,15 @@ public class UserServiceImpl implements UserService {
         if(user.isPresent()){
             throw new EntityExistsException(ValidationMessage.USER_ALREADY_EXISTS.getName());
         }
+
         UserEntity userEntity = mapper.map(userDto,UserEntity.class);
         userEntity.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userEntity.setStatus(UserStatus.ACTIVE);
+
+        //Assign "User" role to user
+        Set<Role> role = roleRepository.findByName(RoleName.USER);
+        userEntity.setRoles(role);
+
         userRepository.save(userEntity);
     }
 

@@ -29,6 +29,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
@@ -67,9 +68,6 @@ public class AuthenticationController {
 
                 return authenticationService.authenticateUser(authentication);
         } catch (BadCredentialsException ex) {
-//            if (user.isPresent()) {
-//                authenticationService.lockedUser(authenticationRequest.getUserName());
-//            }
             LOGGER.error(String.format("Authentication failed '%s'.", ex.getMessage()));
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, SpringSecurity.BAD_CREDENTIALS_UNAUTHORIZED.getValue());
         }
@@ -85,7 +83,7 @@ public class AuthenticationController {
 
 
     @PostMapping(value = "/register")
-    public ResponseEntity<Object> register(@RequestBody UserDto userDto,HttpServletRequest request) {
+    public ResponseEntity<Object> register(@RequestBody @Valid UserDto userDto, HttpServletRequest request) {
         userService.addUser(userDto);
         return ResponseEntity.noContent().build();
     }

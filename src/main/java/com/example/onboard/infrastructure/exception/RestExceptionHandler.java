@@ -1,9 +1,16 @@
 package com.example.onboard.infrastructure.exception;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Data;
+import lombok.SneakyThrows;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -25,17 +32,21 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import javax.persistence.EntityExistsException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.Timestamp;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.CONFLICT;
+import static org.springframework.http.HttpStatus.*;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 @Slf4j
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @Autowired
+    ObjectMapper objectMapper;
     /**
      * Handle MissingServletRequestParameterException. Triggered when a 'required' request parameter is missing.
      *
@@ -99,21 +110,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Handles javax.validation.ConstraintViolationException. Thrown when @Validated fails.
-     *
-     * @param ex the ConstraintViolationException
-     * @return the ApiError object
-     */
-//    @ExceptionHandler(javax.validation.ConstraintViolationException.class)
-//    protected ResponseEntity<Object> handleConstraintViolation(
-//            javax.validation.ConstraintViolationException ex) {
-//        ApiError apiError = new ApiError(BAD_REQUEST);
-//        apiError.setMessage("Validation error");
-//        apiError.addValidationErrors(ex.getConstraintViolations());
-//        return buildResponseEntity(apiError);
-//    }
-
-    /**
      * Handle HttpMessageNotReadableException. Happens when request JSON is malformed.
      *
      * @param ex      HttpMessageNotReadableException
@@ -168,7 +164,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(javax.persistence.EntityNotFoundException.class)
     protected ResponseEntity<Object> handleEntityNotFound(javax.persistence.EntityNotFoundException ex) {
-        return buildResponseEntity(new ApiError(HttpStatus.NOT_FOUND, ex));
+        ApiError apiError = new ApiError(NOT_FOUND);
+        apiError.setMessage(String.format("%s ", ex.getMessage()));
+        return buildResponseEntity(apiError);
     }
 
     @ExceptionHandler(RuntimeException.class)
@@ -216,22 +214,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
+    @SneakyThrows
     private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
-        log.error(apiError.getDebugMessage());
-        Gson gson = new Gson();
-        String errMsg = "";
-
-        if (apiError.getSubErrors() != null) {
-            List<String> errors = apiError.getSubErrors()
-                    .stream()
-                    .map(x -> x.toString())
-                    .collect(Collectors.toList());
-
-            errMsg = gson.toJson(errors);
-        } else {
-            errMsg = gson.toJson(apiError.getMessage());
-        }
-        return ResponseEntity.status(apiError.getStatus()).body(errMsg);
+        final Map<String, Object> result=new LinkedHashMap<>();
+        result.put("timestamp", apiError.getTimestamp());
+        result.put("status", apiError.getStatus());
+        result.put("message", apiError.getMessage());
+        result.put("errors", apiError.getSubErrors());
+        return ResponseEntity.status(apiError.getStatus()).body(objectMapper.writeValueAsString(result));
     }
+
 
 }

@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
@@ -24,4 +26,13 @@ public class Role extends BaseModel {
     @Column(name = "description")
     private String description;
 
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
+    private Set<UserEntity> users;
+
+
+    public Role(RoleName name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }

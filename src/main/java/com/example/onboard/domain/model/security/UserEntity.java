@@ -9,7 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
+
 import java.util.Set;
 
 @Getter
@@ -33,6 +33,7 @@ public class UserEntity extends BaseModel {
     private String userName;
 
     private String password;
+
     @NotBlank
     @Size(max = 40)
     @Email
@@ -62,7 +63,6 @@ public class UserEntity extends BaseModel {
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
-
+    private Set<Role> roles;
 
 }
