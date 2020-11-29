@@ -77,8 +77,7 @@ public class Client extends BaseModel {
     private String timeZone;
 
 
-    String calculationMethod;
-    String juristicMethod;
+
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "status")
