@@ -19,6 +19,8 @@ import javax.persistence.OneToOne;
 public class ClientSetting extends BaseModel {
      private  String latitude;
      private  String longitude;
+     private String juristicMethod;
+     private String calculationMethod;
 
      @OneToOne(cascade = CascadeType.ALL)
      @JoinColumn(name = "currency_id",referencedColumnName = "id")
