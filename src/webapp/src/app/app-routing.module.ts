@@ -3,10 +3,12 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ClientSettingComponent } from './client-setting/client-setting.component';
 
 const routes: Routes = [
   {path:"",component: LoginComponent},
   {path:"home",component: HomeComponent, canActivate:[AuthguardGuard]}
+  ,{path:"clientsetting",component:ClientSettingComponent}
 ];
 
 @NgModule({

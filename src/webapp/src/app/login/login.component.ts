@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { login } from './login';
 import { ToastrService } from 'ngx-toastr';
- 
+
 
 
 @Component({
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private service : MainServiceService,
     private router : Router,
     private toastr: ToastrService
-    
+
   ) { }
 
   user : User = new User();
@@ -44,9 +44,18 @@ export class LoginComponent implements OnInit {
   erasingRegisterFields(){
     this.user.userName="";
     this.user.password="";
-    this.user.email="";
-    this.user.firstName="";
-    this.user.age=null;
+    this.user.city="";
+    this.user.country="";
+    this.user.masjidName=""
+    this.user.website="";
+    this.user.zip="";
+    this.user.timezone="";
+    this.user.contactNumber="";
+    this.user.state="";
+
+
+
+    // this.user.age=null;
   }
 
   erasingLoginFields(){
@@ -55,6 +64,8 @@ export class LoginComponent implements OnInit {
   }
 
   registerUser(){
+    this.user.status="1";
+    this.user.timezone="abc"
   console.log("UserBody",this.user)
   this.service.registerUser(this.user).subscribe(
     res=>{
