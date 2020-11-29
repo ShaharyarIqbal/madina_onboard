@@ -29,21 +29,24 @@ public class CurrencyServiceImpl implements CurrencyService {
                 .filter(Objects::nonNull)
                 .filter(Currency::getIsActive)
                 .collect(Collectors.toList());
-
     }
 
     @Override
     public Currency getCurrencyById(Long id) {
-        return null;
+        return currencyRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No Currency Found"));
     }
 
     @Override
     public Currency createCurrency(Currency currency) {
-        return null;
+        return currencyRepository.save(currency);
     }
 
     @Override
     public Currency deleteCurrency(Long id) {
-        return null;
+        Currency currency = currencyRepository.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("No Currency Found"));
+        currency.setIsDeleted((byte) 1);
+        return currencyRepository.save(currency);
     }
 }
