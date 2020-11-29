@@ -19,10 +19,10 @@ import javax.validation.constraints.Size;
 @Entity
 public class Currency extends BaseModel {
 
-    @Size(min = 1, max = 5)
+    @Size(min = 3, max = 3,message = "size must be 3 digits")
     @Column(unique = true)
     String currency;
-    Boolean isActive;
+    Boolean isActive =true;
 
     @OneToOne (mappedBy = "currency")
     private ClientSetting clientSetting;

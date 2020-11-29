@@ -191,7 +191,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         if (ex.getCause() instanceof ConstraintViolationException) {
             if (ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
                 SQLIntegrityConstraintViolationException exception = (SQLIntegrityConstraintViolationException) ex.getCause().getCause();
-                return ResponseEntity.status(HttpStatus.CONFLICT).header("err-msg", exception.getLocalizedMessage()).build();
+                return buildResponseEntity(new ApiError(HttpStatus.CONFLICT,exception.getLocalizedMessage(),exception));
             }
             return buildResponseEntity(new ApiError(HttpStatus.CONFLICT, "Database error", ex.getCause()));
         }
