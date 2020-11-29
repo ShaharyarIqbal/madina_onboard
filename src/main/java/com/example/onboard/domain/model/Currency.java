@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -22,4 +23,7 @@ public class Currency extends BaseModel {
     @Column(unique = true)
     String currency;
     Boolean isActive;
+
+    @OneToOne (mappedBy = "currency")
+    private ClientSetting clientSetting;
 }

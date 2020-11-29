@@ -3,13 +3,13 @@ package com.example.onboard.controller;
 
 
 import com.example.onboard.constant.UserStatus;
-import com.example.onboard.domain.dto.UserDto;
+import com.example.onboard.domain.dto.ClientDto;
 import com.example.onboard.domain.model.security.AuthenticationRequest;
-import com.example.onboard.domain.model.security.UserEntity;
+import com.example.onboard.domain.model.security.User;
 import com.example.onboard.infrastructure.security.AuthenticationService;
 import com.example.onboard.infrastructure.security.JwtAuthenticationResponse;
 import com.example.onboard.infrastructure.security.constant.SpringSecurity;
-import com.example.onboard.service.UserService;
+import com.example.onboard.service.ClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.net.URI;
 import java.util.Optional;
 
 @CrossOrigin
@@ -48,7 +47,7 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
     @Autowired
-    private UserService userService;
+    private ClientService clientService;
 
     @Autowired
     @Qualifier(value = "logoutSuccess")
@@ -56,9 +55,8 @@ public class AuthenticationController {
 
     @PostMapping(value = "/login")
     public JwtAuthenticationResponse authenticateUser(@RequestBody AuthenticationRequest authenticationRequest) {
-        Optional<UserEntity> user =  userService.findByUserName(authenticationRequest.getUserName());
+        Optional<User> user =  clientService.findByUserName(authenticationRequest.getUserName());
         try {
-
             if (user.isPresent() && user.get().getStatus() == UserStatus.INACTIVE) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, SpringSecurity.ACCOUNT_INACTIVE.getValue());
             }
@@ -83,8 +81,8 @@ public class AuthenticationController {
 
 
     @PostMapping(value = "/register")
-    public ResponseEntity<Object> register(@RequestBody @Valid UserDto userDto, HttpServletRequest request) {
-        userService.addUser(userDto);
+    public ResponseEntity<Object> register(@RequestBody @Valid ClientDto clientDto, HttpServletRequest request) {
+        clientService.addUser(clientDto);
         return ResponseEntity.noContent().build();
     }
 }

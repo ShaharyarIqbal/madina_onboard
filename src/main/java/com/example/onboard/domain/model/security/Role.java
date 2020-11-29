@@ -2,12 +2,12 @@ package com.example.onboard.domain.model.security;
 
 import com.example.onboard.constant.RoleName;
 import com.example.onboard.domain.model.BaseModel;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,9 +26,9 @@ public class Role extends BaseModel {
     @Column(name = "description")
     private String description;
 
-
+    @JsonIgnoreProperties("roles")
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
-    private Set<UserEntity> users;
+    private Set<Client> users;
 
 
     public Role(RoleName name, String description) {
