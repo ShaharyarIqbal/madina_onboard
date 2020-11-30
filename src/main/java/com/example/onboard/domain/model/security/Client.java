@@ -4,6 +4,7 @@ package com.example.onboard.domain.model.security;
 import com.example.onboard.constant.UserStatus;
 import com.example.onboard.domain.model.BaseModel;
 import com.example.onboard.domain.model.ClientSetting;
+import com.example.onboard.domain.model.PrayerTime;
 import lombok.*;
 
 import javax.persistence.*;
@@ -89,7 +90,11 @@ public class Client extends BaseModel {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @OneToOne (mappedBy = "currency")
+    @OneToOne (mappedBy = "client")
     private ClientSetting clientSetting;
+
+    @OneToOne (mappedBy = "client")
+    private PrayerTime prayerTime;
+    ;
 
 }
