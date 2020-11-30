@@ -12,10 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
+@Service
 public class PrayerTimeServiceImpl implements PrayerTimeService {
     ModelMapper mapper;
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -76,13 +80,17 @@ public class PrayerTimeServiceImpl implements PrayerTimeService {
     @Override
     public String deletePrayerTime(Long id)
     {
-        try {
-            prayerTimeRepository.deleteById(id);
-            return id.toString();
-        }
-        catch(Exception e)
-        {
-            throw new EntityExistsException("Unable to delete Prayer Time");
-        }
+        PrayerTime   prayerTime = prayerTimeRepository.findById(id).orElseThrow(() ->
+                     new EntityNotFoundException(ValidationMessage.ENTITY_NOT_FOUND.getName()));
+
+
+
+        prayerTime.setIsDeleted((byte) 0);
+        prayerTimeRepository.save(prayerTime);
+        return id.toString();
+
+
+
+
     }
 }
