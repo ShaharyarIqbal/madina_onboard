@@ -22,10 +22,10 @@ public class MyRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        List<Role> roles = new ArrayList<>();
-        roles.add(new Role(RoleName.ADMIN,"admin roles"));
-        roles.add(new Role(RoleName.USER,"user roles"));
-        roleRepository.saveAll(roles);
+//
+//        List<Role> roles = new ArrayList<>();
+//        roles.add(new Role(RoleName.ADMIN,"admin roles"));
+//        roles.add(new Role(RoleName.USER,"user roles"));
+//        roleRepository.saveAll(roles);
     }
 }

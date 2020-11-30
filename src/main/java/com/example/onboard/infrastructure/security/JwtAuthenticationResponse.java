@@ -12,14 +12,15 @@ public class JwtAuthenticationResponse {
     private String tokenType = "Bearer";
     private Collection<? extends GrantedAuthority> roles;
     private String userName;
+    private  Long id;
 
 
-
-    public JwtAuthenticationResponse(String accessToken, Collection<? extends GrantedAuthority> authorities, String userName) {
+    public JwtAuthenticationResponse(String accessToken, Collection<? extends GrantedAuthority> authorities, String userName,Long id) {
         this.accessToken = accessToken;
         this.roles = authorities;
 
         this.userName = userName;
+        this.id=id;
 
     }
 
@@ -55,5 +56,12 @@ public class JwtAuthenticationResponse {
         this.userName = userName;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
 
