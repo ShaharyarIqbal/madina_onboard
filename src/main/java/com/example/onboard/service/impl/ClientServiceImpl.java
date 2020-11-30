@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 import javax.xml.ws.Response;
 import java.util.List;
 import java.util.Optional;
@@ -101,24 +102,18 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public String deleteClient(Long id)
-    {
-        Optional<Client> client =clientRepository.findById(id);
-        if(!client.isPresent() )
-        {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        else{
-            Byte b = 1;
-            Client updatedClient = client.get();
-            updatedClient.setIsDeleted(b);
-            updatedClient.setStatus(UserStatus.INACTIVE);
-            User user = userRepository.findById(id).get();
-            user.setStatus(UserStatus.INACTIVE);
-            userRepository.save(user);
-            clientRepository.save(updatedClient);
-            return (client.get().getId().toString());
-        }
+    public String deleteClient(Long id) {
+        Client client = clientRepository.findById(id)
+                .orElseThrow(()->  new EntityNotFoundException(ValidationMessage.USER_NOT_FOUND.getName()));
+
+//        Client updatedClient = client.get();
+        client.setIsDeleted((byte)1);
+        client.setStatus(UserStatus.INACTIVE);
+        User user = userRepository.findById(id).get();
+        user.setStatus(UserStatus.INACTIVE);
+        userRepository.save(user);
+        clientRepository.save(client);
+        return id.toString();
 
     }
     @Override

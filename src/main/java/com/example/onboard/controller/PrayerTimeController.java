@@ -20,7 +20,7 @@ public class PrayerTimeController {
 
 
     @GetMapping("/{id}")
-    public PrayerTime getPrayerTimingByClientId(@Param("id") Long id)
+    public PrayerTime getPrayerTimingByClientId(@PathVariable("id") Long id)
     {
       return prayerTimeService.getPrayerTimeByClientId(id);
     }
@@ -32,12 +32,12 @@ public class PrayerTimeController {
     }
 
     @PutMapping ("/{id}")
-    public PrayerTime updatePrayerTime(@Param("id") Long id,@RequestBody PrayerTimeDto  prayerTimeDto )
+    public PrayerTime updatePrayerTime(@PathVariable("id") Long id,@RequestBody PrayerTimeDto  prayerTimeDto )
     {
         return prayerTimeService.updatePrayerTime(id,prayerTimeDto);
     }
     @DeleteMapping("/{id}")
-    public String deletePrayerTime(@Param("id") Long id)
+    public String deletePrayerTime(@PathVariable("id") Long id)
     {
         return prayerTimeService.deletePrayerTime(id);
     }
