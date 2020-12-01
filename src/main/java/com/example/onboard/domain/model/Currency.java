@@ -1,22 +1,24 @@
 package com.example.onboard.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 public class Currency extends BaseModel {
 
     @Size(min = 3, max = 3,message = "size must be 3 digits")
@@ -24,6 +26,7 @@ public class Currency extends BaseModel {
     String currency;
     Boolean isActive =true;
 
-    @OneToOne (mappedBy = "currency")
-    private ClientSetting clientSetting;
+    @OneToMany(mappedBy = "currency")
+    private List<ClientSetting> clientSettings;
+
 }

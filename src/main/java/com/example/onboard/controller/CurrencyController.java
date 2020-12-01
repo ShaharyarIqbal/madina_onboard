@@ -1,5 +1,6 @@
 package com.example.onboard.controller;
 
+import com.example.onboard.domain.dto.CurrencyDto;
 import com.example.onboard.domain.model.Currency;
 import com.example.onboard.service.CurrencyService;
 import lombok.AccessLevel;
@@ -17,31 +18,31 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/currency", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
-@FieldDefaults(makeFinal = true,level = AccessLevel.PRIVATE)
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class CurrencyController {
 
     CurrencyService currencyService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    public List<Currency> currencyList(){
+    public List<CurrencyDto> currencyList() {
         return currencyService.getAllCurrency();
     }
 
     @PutMapping
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public Currency createCurrency(@RequestBody @Valid Currency currency){
-        return currencyService.createCurrency(currency);
+    public CurrencyDto createCurrency(@RequestBody @Valid CurrencyDto currencyDto) {
+        return currencyService.createCurrency(currencyDto);
     }
 
     @GetMapping("/{id}")
-    public Currency getCurrency(@PathVariable Long id){
+    public CurrencyDto getCurrency(@PathVariable Long id) {
         return currencyService.getCurrencyById(id);
     }
 
     @DeleteMapping
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public Currency deleteCurrency(@PathVariable Long id){
+    public CurrencyDto deleteCurrency(@PathVariable Long id) {
         return currencyService.deleteCurrency(id);
     }
 }

@@ -55,7 +55,7 @@ public class ClientController {
     }
 
 
-    @GetMapping(value = "clientsettting/{id}")
+    @GetMapping(value = "clientsetting/{id}")
     public ClientSetting getClientSetting(@PathVariable("id")Long id)
     {
         return  clientSettingService.clientSettingById(id);

@@ -1,18 +1,19 @@
 package com.example.onboard.service;
 
+import com.example.onboard.domain.dto.CurrencyDto;
 import com.example.onboard.domain.model.Currency;
 
 import java.util.List;
 
 public interface CurrencyService {
 
-    List<Currency> getAllCurrency();
+    List<CurrencyDto> getAllCurrency();
 
-    Currency getCurrencyById(Long id);
+    CurrencyDto getCurrencyById(Long id);
 
-    Currency createCurrency(Currency currency);
+    CurrencyDto createCurrency(CurrencyDto currency);
 
-    Currency deleteCurrency(Long id);
+    CurrencyDto deleteCurrency(Long id);
 
 
 }

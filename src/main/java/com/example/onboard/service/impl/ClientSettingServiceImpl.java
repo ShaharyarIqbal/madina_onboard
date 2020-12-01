@@ -4,8 +4,12 @@ import com.example.onboard.constant.ValidationMessage;
 import com.example.onboard.domain.dto.ClientDto;
 import com.example.onboard.domain.dto.ClientSettingDto;
 import com.example.onboard.domain.model.ClientSetting;
+import com.example.onboard.domain.model.Currency;
 import com.example.onboard.domain.model.security.Client;
+import com.example.onboard.domain.repository.ClientRepository;
 import com.example.onboard.domain.repository.ClientSettingRepository;
+import com.example.onboard.domain.repository.CurrencyRepository;
+import com.example.onboard.service.ClientService;
 import com.example.onboard.service.ClientSettingService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -31,15 +35,29 @@ public class ClientSettingServiceImpl implements ClientSettingService {
 
     @Autowired
     ClientSettingRepository clientSettingRepository;
+    @Autowired
+    ClientRepository clientRepository;
+    @Autowired
+    CurrencyRepository currencyRepository;
 
 
     @Override
     public ClientSetting createClientSetting(ClientSettingDto clientSettingDto){
+
         ClientSetting clientSetting = mapper.map(clientSettingDto, ClientSetting.class);
 
         try{
+            Client client = clientRepository.findById(clientSettingDto.getClientId()).get();
+//            Currency currency = currencyRepository.findById().get();
 
-        return clientSettingRepository.save(clientSetting);
+            clientSetting.setClient(client);
+            Currency currency = new Currency();
+            currency.setId(clientSettingDto.getCurrencyId());
+            clientSetting.setCurrency(currency);
+            client.setClientSetting(clientSetting);
+            clientRepository.save(client);
+            return clientSetting;
+//             return clientSettingRepository.save(clientSetting);
         }
 
         catch (Exception e)
@@ -51,7 +69,7 @@ public class ClientSettingServiceImpl implements ClientSettingService {
     @Override
     public ClientSetting clientSettingById(Long id)
     {
-        Optional<ClientSetting>  clientSetting = clientSettingRepository.findById(id);
+        Optional<ClientSetting>  clientSetting = clientSettingRepository.findByClientId(id);
 
         if(!clientSetting.isPresent())
         {

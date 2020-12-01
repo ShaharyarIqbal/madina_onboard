@@ -60,11 +60,13 @@ public class AuthenticationController {
             if (user.isPresent() && user.get().getStatus() == UserStatus.INACTIVE) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, SpringSecurity.ACCOUNT_INACTIVE.getValue());
             }
+
             Authentication authentication = authenticationManager.authenticate(new
                     UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(),
                     authenticationRequest.getPassword()));
 
                 return authenticationService.authenticateUser(authentication);
+
         } catch (BadCredentialsException ex) {
             LOGGER.error(String.format("Authentication failed '%s'.", ex.getMessage()));
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, SpringSecurity.BAD_CREDENTIALS_UNAUTHORIZED.getValue());

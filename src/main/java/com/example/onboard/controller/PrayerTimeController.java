@@ -20,7 +20,7 @@ public class PrayerTimeController {
 
 
     @GetMapping("/{id}")
-    public PrayerTime getPrayerTimingByClientId(@PathVariable("id") Long id)
+    public PrayerTimeDto getPrayerTimingByClientId(@PathVariable("id") Long id)
     {
       return prayerTimeService.getPrayerTimeByClientId(id);
     }

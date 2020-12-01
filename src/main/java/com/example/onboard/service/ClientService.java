@@ -17,7 +17,7 @@ public interface ClientService {
      * @param userName
      * @return User
      */
-    Optional<User> findByUserName(String userName);
+    Optional<User>  findByUserName(String userName);
 
     void addUser(ClientDto clientDto);
 

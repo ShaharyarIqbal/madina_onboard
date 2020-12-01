@@ -90,7 +90,8 @@ public class Client extends BaseModel {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @OneToOne (mappedBy = "client")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_setting_id", referencedColumnName = "id")
     private ClientSetting clientSetting;
 
     @OneToOne (mappedBy = "client")

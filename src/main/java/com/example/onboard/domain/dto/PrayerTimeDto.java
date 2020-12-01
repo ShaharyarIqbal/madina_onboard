@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -17,41 +18,41 @@ public class PrayerTimeDto {
 
     Long  id;
     @NotNull(message = "Client Id cannot be Null")
-    Long client_id;
+    Long clientId;
 
     @NotNull(message = "Date Should Not Be Null")
-    LocalDateTime date;
+    String date;
 
     @NotNull(message = "Fajr Adhaan Time Should Not Be Null")
-    LocalDateTime fajr_adhaan;
+    String fajrAdhaan;
 
     @NotBlank(message = "Fajr Iqamah Time  Should Not Be Null")
-    LocalDateTime fajr_iqamah;
+    String fajrIqamah;
 
 
     @NotBlank(message = "Dhuhr Adahaan  Time  Should Not Be Null")
-    LocalDateTime dhuhr_adhaan;
+    String dhuhrAdhaan;
 
     @NotBlank(message = "Duhr Iqamah Time  Should Not Be Null")
-    LocalDateTime dhuhr_iqamah;
+    String dhuhrIqamah;
 
     @NotBlank(message = "Asr Adahaan  Time  Should Not Be Null")
-    LocalDateTime asr_adhaan;
+    String asrAdhaan;
 
     @NotBlank(message = "Asr Iqamah Time  Should Not Be Null")
-    String asr_iqamah;
+    String asrIqamah;
 
 
     @NotBlank(message = "Magrib Adahaan  Time  Should Not Be Null")
-    LocalDateTime maghrib_adhaan;
+    String maghribAdhaan;
 
     @NotBlank(message = "Maghrib Iqamah Time  Should Not Be Null")
-    LocalDateTime maghrib_iqamah;
+    String maghribIqamah;
 
 
     @NotBlank(message = "Isha Adahaan  Time  Should Not Be Null")
-    LocalDateTime isha_adhaan;
+    String ishaAdhaan;
 
     @NotBlank(message = "Isha Iqamah Time  Should Not Be Null")
-    LocalDateTime isha_iqamah;
+    String ishaIqamah;
 }

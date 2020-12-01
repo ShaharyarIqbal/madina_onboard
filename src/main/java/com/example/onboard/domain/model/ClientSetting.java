@@ -1,15 +1,14 @@
 package com.example.onboard.domain.model;
 
 import com.example.onboard.domain.model.security.Client;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -22,12 +21,13 @@ public class ClientSetting extends BaseModel {
      private String juristicMethod;
      private String calculationMethod;
 
-     @OneToOne(cascade = CascadeType.ALL)
-     @JoinColumn(name = "currency_id",referencedColumnName = "id")
+
+     @ManyToOne
+     @JoinColumn(name = "currency_id")
      private  Currency currency;
 
-     @OneToOne(cascade = CascadeType.ALL)
-     @JoinColumn(name="client_id",referencedColumnName = "id")
+     @JsonIgnoreProperties("clientSetting")
+     @OneToOne(mappedBy = "clientSetting")
      private Client client;
 
 

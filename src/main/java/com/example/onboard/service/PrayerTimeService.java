@@ -5,7 +5,7 @@ import com.example.onboard.domain.model.PrayerTime;
 
 public interface PrayerTimeService {
 
-    PrayerTime getPrayerTimeByClientId(Long id);
+    PrayerTimeDto getPrayerTimeByClientId(Long id);
 
     PrayerTime createPrayerTime (PrayerTimeDto prayerTimeDto);
 
