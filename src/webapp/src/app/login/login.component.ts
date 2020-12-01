@@ -16,14 +16,14 @@ export class LoginComponent implements OnInit {
 
 
   constructor(
-    private service : MainServiceService,
-    private router : Router,
+    private service: MainServiceService,
+    private router: Router,
     private toastr: ToastrService
 
   ) { }
 
-  user : User = new User();
-  loginUserDetails : login = new login();
+  user: User = new User();
+  loginUserDetails: login = new login();
   login = true;
   register = false;
 
@@ -31,76 +31,73 @@ export class LoginComponent implements OnInit {
     sessionStorage.clear();
   }
 
-  goToLogin(){
+  goToLogin() {
     this.register = false;
     this.login = true;
   }
 
-  goToRegister(){
+  goToRegister() {
     this.login = false;
     this.register = true;
   }
 
-  erasingRegisterFields(){
-    this.user.userName="";
-    this.user.password="";
-    this.user.city="";
-    this.user.country="";
-    this.user.masjidName=""
-    this.user.website="";
-    this.user.zip="";
-    this.user.timezone="";
-    this.user.contactNumber="";
-    this.user.state="";
-
-
-
-    // this.user.age=null;
+  erasingRegisterFields() {
+    this.user.userName = "";
+    this.user.password = "";
+    this.user.city = "";
+    this.user.country = "";
+    this.user.masjidName = ""
+    this.user.website = "";
+    this.user.zip = "";
+    this.user.timezone = "";
+    this.user.contactNumber = "";
+    this.user.state = "";
+    this.user.street="";
   }
 
-  erasingLoginFields(){
-    this.loginUserDetails.userName="";
-    this.loginUserDetails.password="";
+  erasingLoginFields() {
+    this.loginUserDetails.userName = "";
+    this.loginUserDetails.password = "";
   }
 
-  registerUser(){
-    this.user.status="1";
-    this.user.timezone="abc"
-  console.log("UserBody",this.user)
-  this.service.registerUser(this.user).subscribe(
-    res=>{
-    this.toastr.success("USER SUCCESSFULLY REGISTER")
-    this.erasingRegisterFields();
-   },
-   error=>{
-     console.log("Response",error.status)
-     this.toastr.error("USER ALREADY EXIST")
-   })
+  registerUser() {
+    this.user.status = "1";
+    console.log("UserBody", this.user)
+    this.service.registerUser(this.user).subscribe(
+      res => {
+        this.toastr.success("USER SUCCESSFULLY REGISTER")
+        this.erasingRegisterFields();
+      },
+      error => {
+        console.log("Response", error.status)
+        this.toastr.error("USER ALREADY EXIST")
+      })
   }
 
-  loginUser(){
+  loginUser() {
     console.log("LoginDetails", this.loginUserDetails)
     this.service.loginUser(this.loginUserDetails).subscribe(
-      res=>{
-      if(res){
-        console.log("Response",res)
-        this.erasingLoginFields();
-        sessionStorage.setItem('token',res.accessToken);
-        if(res.roles){
-          res.roles.map(d=>{
-            sessionStorage.setItem('role',d.authority)
-            if(d.authority=="USER"){
-              this.toastr.success("LOGIN SUCCESSFULLY ")
-              this.router.navigate(['home'])
-            }
-          })
+      res => {
+        if (res) {
+          console.log("Response", res)
+          this.erasingLoginFields();
+          sessionStorage.setItem('token', res.accessToken);
+          sessionStorage.setItem('ClientId',res.id);
+          if (res.roles) {
+            res.roles.map(d => {
+              sessionStorage.setItem('role', d.authority)
+              if (d.authority == "USER"|| d.authority =="ADMIN") {
+                this.toastr.success("LOGIN SUCCESSFULLY ")
+                this.router.navigate(['clientsetting'])
+              }
+            })
+          }
         }
-      }
-    },
-    error=>{
-      console.log("Response",error.status)
-      this.toastr.error("LOGIN FAILED")
-    })
+      },
+      error => {
+        console.log("Response", error.status)
+        this.toastr.error("LOGIN FAILED")
+      })
   }
 
 }

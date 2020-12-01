@@ -1,9 +1,9 @@
 export class ClientSetting{
 
-     clientId;
-     latitude;
-     longitude;
-     calculationMethod;
-     juristicMethod;
-     currencyId;
+     clientId:Number;
+     latitude:Number;
+     longitude:Number;
+     calculationMethod="";
+     juristicMethod="";
+     currencyId = null;
 }

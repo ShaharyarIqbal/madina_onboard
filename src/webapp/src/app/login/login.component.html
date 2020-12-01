@@ -3,7 +3,7 @@
   Your browser does not support HTML5 video.
 </video>
 <div class="logo">
-  <img src="assets/madinaapps-logo.png" height="100px" width="300px">
+  <img src="assets/madinaapps-logo.png" height="60px" width="250px">
 </div>
 
 <div *ngIf="login" class="content">
@@ -33,45 +33,191 @@
     <div class="col-md-6" class="content1">
       <h3 class="heading">Register</h3>
       <form>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input id="transparent" type="text" class="form-control" [(ngModel)]="user.userName" placeholder="Username *" name="Username" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input id="transparent" type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password *" name="Password" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input id="transparent" type="email" class="form-control" [(ngModel)]="user.country" placeholder="Country *" name="country" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input id="transparent" type="text" class="form-control" [(ngModel)]="user.state" placeholder="State*" name="state" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input id="transparent"  class="form-control" [(ngModel)]="user.city" placeholder="City *" name="city" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input id="transparent"  class="form-control" [(ngModel)]="user.website" placeholder="Website *" name="website" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input id="transparent"  class="form-control" [(ngModel)]="user.street" placeholder="Street *" name="street" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input id="transparent"  class="form-control" [(ngModel)]="user.zip" placeholder="Zip *" name="zip" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input id="transparent"  class="form-control" [(ngModel)]="user.masjidName" placeholder="Masjid Name *" name="masjidname" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input id="transparent"  class="form-control" [(ngModel)]="user.contactNumber" placeholder="Contact Number *" name="contactNumber" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <select  id="transparent" class="form-control" [(ngModel)]="user.timezone"  name="timeZone">
+                <option  class="font" value="" selected="selected">Select Time Zone </option>
+                <option  class="font" value="Australia/ACT">Australia/ACT</option>
+                <option  class="font" value="Australia/Adelaide">Australia/Adelaide</option>
+                <option  class="font" value="Australia/Brisbane">Australia/Brisbane</option>
+                <option  class="font" value="Australia/Broken_Hill">Australia/Broken_Hill</option>
+                <option  class="font" value="Australia/Canberra">Australia/Canberra</option>
+                <option  class="font" value="Australia/Currie">Australia/Currie</option>
+                <option  class="font" value="Australia/Darwin">Australia/Darwin</option>
+                <option  class="font" value="Australia/Eucla">Australia/Eucla</option>
+                <option  class="font" value="Australia/Hobart">Australia/Hobart</option>
+                <option  class="font" value="Australia/LHI">Australia/LHI</option>
+                <option  class="font" value="Australia/Lindeman">Australia/Lindeman</option>
+                <option  class="font" value="Australia/Lord_Howe">Australia/Lord_Howe</option>
+                <option  class="font" value="Australia/Melbourne">Australia/Melbourne</option>
+                <option  class="font" value="Australia/NSW">Australia/NSW</option>
+                <option  class="font" value="Australia/North">Australia/North</option>
+                <option  class="font" value="Australia/Perth">Australia/Perth</option>
+                <option  class="font" value="Australia/Queensland">Australia/Queensland</option>
+                <option  class="font" value="Australia/South">Australia/South</option>
+                <option  class="font" value="Australia/Sydney">Australia/Sydney</option>
+                <option  class="font" value="Australia/Tasmania">Australia/Tasmania</option>
+                <option  class="font" value="Australia/Victoria">Australia/Victoria</option>
+                <option  class="font" value="Australia/West">Australia/West</option>
+                <option  class="font" value="Australia/Yancowinna">Australia/Yancowinna</option>
+                <option  class="font" value="Canada/Atlantic">Canada/Atlantic</option>
+                <option  class="font" value="Canada/Central">Canada/Central</option>
+                <option  class="font" value="Canada/Eastern">Canada/Eastern</option>
+                <option  class="font" value="Canada/Mountain">Canada/Mountain</option>
+                <option  class="font" value="Canada/Newfoundland">Canada/Newfoundland</option>
+                <option  class="font" value="Canada/Pacific">Canada/Pacific</option>
+                <option  class="font" value="Canada/Saskatchewan">Canada/Saskatchewan</option>
+                <option  class="font" value="Canada/Yukon">Canada/Yukon</option>
+                <option  class="font" value="Europe/Amsterdam">Europe/Amsterdam</option>
+                <option  class="font" value="Europe/Andorra">Europe/Andorra</option>
+                <option  class="font" value="Europe/Astrakhan">Europe/Astrakhan</option>
+                <option  class="font" value="Europe/Athens">Europe/Athens</option>
+                <option  class="font" value="Europe/Belfast">Europe/Belfast</option>
+                <option  class="font" value="Europe/Belgrade">Europe/Belgrade</option>
+                <option  class="font" value="Europe/Berlin">Europe/Berlin</option>
+                <option  class="font" value="Europe/Bratislava">Europe/Bratislava</option>
+                <option  class="font" value="Europe/Brussels">Europe/Brussels</option>
+                <option  class="font" value="Europe/Bucharest">Europe/Bucharest</option>
+                <option  class="font" value="Europe/Budapest">Europe/Budapest</option>
+                <option  class="font" value="Europe/Busingen">Europe/Busingen</option>
+                <option  class="font" value="Europe/Chisinau">Europe/Chisinau</option>
+                <option  class="font" value="Europe/Copenhagen">Europe/Copenhagen</option>
+                <option  class="font" value="Europe/Dublin">Europe/Dublin</option>
+                <option  class="font" value="Europe/Gibraltar">Europe/Gibraltar</option>
+                <option  class="font" value="Europe/Guernsey">Europe/Guernsey</option>
+                <option  class="font" value="Europe/Helsinki">Europe/Helsinki</option>
+                <option  class="font" value="Europe/Isle_of_Man">Europe/Isle_of_Man</option>
+                <option  class="font" value="Europe/Istanbul">Europe/Istanbul</option>
+                <option  class="font" value="Europe/Jersey">Europe/Jersey</option>
+                <option  class="font" value="Europe/Kaliningrad">Europe/Kaliningrad</option>
+                <option  class="font" value="Europe/Kiev">Europe/Kiev</option>
+                <option  class="font" value="Europe/Kirov">Europe/Kirov</option>
+                <option  class="font" value="Europe/Lisbon">Europe/Lisbon</option>
+                <option  class="font" value="Europe/Ljubljana">Europe/Ljubljana</option>
+                <option  class="font" value="Europe/London">Europe/London</option>
+                <option  class="font" value="Europe/Luxembourg">Europe/Luxembourg</option>
+                <option  class="font" value="Europe/Madrid">Europe/Madrid</option>
+                <option  class="font" value="Europe/Malta">Europe/Malta</option>
+                <option  class="font" value="Europe/Mariehamn">Europe/Mariehamn</option>
+                <option  class="font" value="Europe/Minsk">Europe/Minsk</option>
+                <option  class="font" value="Europe/Monaco">Europe/Monaco</option>
+                <option  class="font" value="Europe/Moscow">Europe/Moscow</option>
+                <option  class="font" value="Europe/Nicosia">Europe/Nicosia</option>
+                <option  class="font" value="Europe/Oslo">Europe/Oslo</option>
+                <option  class="font" value="Europe/Paris">Europe/Paris</option>
+                <option  class="font" value="Europe/Podgorica">Europe/Podgorica</option>
+                <option  class="font" value="Europe/Prague">Europe/Prague</option>
+                <option  class="font" value="Europe/Riga">Europe/Riga</option>
+                <option  class="font" value="Europe/Rome">Europe/Rome</option>
+                <option  class="font" value="Europe/Samara">Europe/Samara</option>
+                <option  class="font" value="Europe/San_Marino">Europe/San_Marino</option>
+                <option  class="font" value="Europe/Sarajevo">Europe/Sarajevo</option>
+                <option  class="font" value="Europe/Saratov">Europe/Saratov</option>
+                <option  class="font" value="Europe/Simferopol">Europe/Simferopol</option>
+                <option  class="font" value="Europe/Skopje">Europe/Skopje</option>
+                <option  class="font" value="Europe/Sofia">Europe/Sofia</option>
+                <option  class="font" value="Europe/Stockholm">Europe/Stockholm</option>
+                <option  class="font" value="Europe/Tallinn">Europe/Tallinn</option>
+                <option  class="font" value="Europe/Tirane">Europe/Tirane</option>
+                <option  class="font" value="Europe/Tiraspol">Europe/Tiraspol</option>
+                <option  class="font" value="Europe/Ulyanovsk">Europe/Ulyanovsk</option>
+                <option  class="font" value="Europe/Uzhgorod">Europe/Uzhgorod</option>
+                <option  class="font" value="Europe/Vaduz">Europe/Vaduz</option>
+                <option  class="font" value="Europe/Vatican">Europe/Vatican</option>
+                <option  class="font" value="Europe/Vienna">Europe/Vienna</option>
+                <option  class="font" value="Europe/Vilnius">Europe/Vilnius</option>
+                <option  class="font" value="Europe/Volgograd">Europe/Volgograd</option>
+                <option  class="font" value="Europe/Warsaw">Europe/Warsaw</option>
+                <option  class="font" value="Europe/Zagreb">Europe/Zagreb</option>
+                <option  class="font" value="Europe/Zaporozhye">Europe/Zaporozhye</option>
+                <option  class="font" value="Europe/Zurich">Europe/Zurich</option>
+                <option  class="font" value="Pacific/Auckland">Pacific/Auckland</option>
+                <option  class="font" value="Pacific/Chatham">Pacific/Chatham</option>
+                <option  class="font" value="US/Alaska">US/Alaska</option>
+                <option  class="font" value="US/Aleutian">US/Aleutian</option>
+                <option  class="font" value="US/Arizona">US/Arizona</option>
+                <option  class="font" value="US/Central" >US/Central</option>
+                <option  class="font" value="US/East-Indiana">US/East-Indiana</option>
+                <option  class="font" value="US/Eastern">US/Eastern</option>
+                <option  class="font" value="US/Hawaii">US/Hawaii</option>
+                <option  class="font" value="US/Indiana-Starke">US/Indiana-Starke</option>
+                <option  class="font" value="US/Michigan">US/Michigan</option>
+                <option  class="font" value="US/Mountain">US/Mountain</option>
+                <option  class="font" value="US/Pacific">US/Pacific</option>
+                <option  class="font" value="US/Pacific-New">US/Pacific-New</option>
+                <option  class="font" value="US/Samoa">US/Samoa</option>
+              </select>            </div>
+          </div>
+        </div>
 
-        <div class="form-group">
-          <input id="transparent" type="text" class="form-control" [(ngModel)]="user.userName" placeholder="Username *" name="Username" />
-        </div>
-        <div class="form-group">
-          <input id="transparent" type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password *" name="Password" />
-        </div>
-        <div class="form-group">
-          <input id="transparent" type="email" class="form-control" [(ngModel)]="user.country" placeholder="Country *" name="country" />
-        </div>
-        <div class="form-group">
-          <input id="transparent" type="text" class="form-control" [(ngModel)]="user.state" placeholder="State*" name="state" />
-        </div>
+       
+        
+       
+       
         <!-- <div class="form-group">
           <input id="transparent" type="text" class="form-control" placeholder="Last Name *" value="" />
         </div> -->
-        <div class="form-group">
-          <input id="transparent"  class="form-control" [(ngModel)]="user.city" placeholder="City *" name="city" />
-        </div>
-
-        <div class="form-group">
-          <input id="transparent"  class="form-control" [(ngModel)]="user.website" placeholder="Website *" name="website" />
-        </div>
-
-        <div class="form-group">
-          <input id="transparent"  class="form-control" [(ngModel)]="user.street" placeholder="Street *" name="street" />
-        </div>
-
-        <div class="form-group">
-          <input id="transparent"  class="form-control" [(ngModel)]="user.zip" placeholder="Zip *" name="zip" />
-        </div>
-
-        <div class="form-group">
-          <input id="transparent"  class="form-control" [(ngModel)]="user.masjidName" placeholder="Masjid Name *" name="masjidname" />
-        </div>
-
-        <div class="form-group">
-          <input id="transparent"  class="form-control" [(ngModel)]="user.contactNumber" placeholder="Contact Number *" name="contactNumber" />
-        </div>
 
 
         <div class="form-group">

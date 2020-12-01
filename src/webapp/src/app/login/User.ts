@@ -9,7 +9,7 @@ export class User{
     state:String
     zip:String
     country:String
-    timezone:String
+    timezone=""
     status
 
 

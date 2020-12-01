@@ -1,3 +1,4 @@
+import { PrayerTimeComponent } from './prayer-time/prayer-time.component';
 import { AuthguardGuard } from './authguard.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -7,8 +8,9 @@ import { ClientSettingComponent } from './client-setting/client-setting.componen
 
 const routes: Routes = [
   {path:"",component: LoginComponent},
-  {path:"home",component: HomeComponent, canActivate:[AuthguardGuard]}
-  ,{path:"clientsetting",component:ClientSettingComponent}
+  {path:"home",component: HomeComponent, canActivate:[AuthguardGuard]},
+  {path:"clientsetting",component:ClientSettingComponent, canActivate:[AuthguardGuard]},
+  {path:"prayertime",component:PrayerTimeComponent}
 ];
 
 @NgModule({

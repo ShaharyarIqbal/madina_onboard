@@ -16,12 +16,14 @@
           <div class="row register-form">
             <div class="col-md-6">
               <div class="form-group">
-                <input name="latitude" [(ngModel)]="clientSetting.latitude" type="text" class="form-control" placeholder="Latitude *" value="" />
+                <input name="latitude" [(ngModel)]="clientSetting.latitude" type="text" class="form-control" placeholder="Latitude *" value="" required />
               </div>
 
               <div class="form-group">
-                <select name="calculationMethod" [(ngModel)]="clientSetting.calculationMethod" class="form-control">
-                  <option class="hidden" selected disabled>Calculation Method</option>
+                <select name="calculationMethod" [(ngModel)]="clientSetting.calculationMethod" class="form-control" required>
+                  <!-- <option class="hidden" selected="selected" disabled>Calculation Method</option> -->
+                  <option value="" disabled selected>Select Calculation Method</option>
+
                   <option value="ISNA" >Islamic Society of North America (ISNA)
                   </option>
                   <option value="MWL">Muslim World League (MWL)
@@ -37,8 +39,8 @@
               </div>
 
               <div class="form-group">
-                <select name="juristicMethod" [(ngModel)]="clientSetting.juristicMethod" class="form-control">
-                  <option class="hidden" selected disabled>Juristic Method</option>
+                <select name="juristicMethod" [(ngModel)]="clientSetting.juristicMethod" class="form-control" required>
+                  <option value="" disabled selected>Select Juristic Method</option>
                   <option value="HANAFI">Hanafi</option>
                   <option value="JAFARI">Ithna Ashari (Jafari)</option>
 
@@ -48,21 +50,25 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <input name="longitude" [(ngModel)]="clientSetting.longitude" type="text" class="form-control" placeholder="Longitude *" value="" />
+                <input name="longitude" [(ngModel)]="clientSetting.longitude" type="text" class="form-control" placeholder="Longitude *" value="" required />
               </div>
               <div class="form-group">
-                <select name="currency" [(ngModel)]="clientSetting.currencyId" class="form-control">
-                  <option class="hidden" selected disabled>Currency</option>
-                  <option value="">Backend se aye gi</option>
+                <select name="currency" required [(ngModel)]="clientSetting.currencyId" class="form-control">
+                  <!-- <option class="hidden" value="0" disabled>Select Currency</option> -->
+                  <option value="null" disabled selected>Select Currency</option>
+                  <option *ngFor="let item of currencyList" label={{item.currency}} value="{{item.id}}">{{item.currency}}</option>
                 </select>
               </div>
 
 
-              <input type="submit" class="btnRegister" value="Register" />
+              <button  type="submit" class="btnRegister" (click)="submitClientSetting()">{{buttonName}}</button>
+
             </div>
           </div>
         </div>
-        <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+
+        <!-- <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
           <h3 class="register-heading">Apply as a Hirer</h3>
           <div class="row register-form">
             <div class="col-md-6">
@@ -102,9 +108,11 @@
               <input type="submit" class="btnRegister" value="Register" />
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 
 </div>
+
+<button (click)="logout()">Logout</button>

@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ClientSettingComponent } from './client-setting/client-setting.component';
+import { PrayerTimeComponent } from './prayer-time/prayer-time.component';
 
 
 
@@ -17,7 +18,8 @@ import { ClientSettingComponent } from './client-setting/client-setting.componen
     AppComponent,
     LoginComponent,
     HomeComponent,
-    ClientSettingComponent
+    ClientSettingComponent,
+    PrayerTimeComponent
   ],
   imports: [
     BrowserModule,
