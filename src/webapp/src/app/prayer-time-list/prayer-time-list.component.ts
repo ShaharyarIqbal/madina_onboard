@@ -21,6 +21,7 @@ export class PrayerTimeListComponent implements OnInit {
   ngOnInit() {
     this.getPrayerTimeListByClientId();
   }
+  
   routeToUpdatePrayerTime(data){
     console.log(data);
     this.router.navigate(['prayertime'],{ queryParams: { id: data.id } })

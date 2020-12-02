@@ -27,9 +27,11 @@ export class ClientSettingComponent implements OnInit {
   
   ngOnInit() {
     this.getCurrencyList();
+    this.getClientSettingById();
   }
 
    
+
 
   submitClientSetting(){
     
@@ -51,26 +53,25 @@ export class ClientSettingComponent implements OnInit {
    
   }
 
-  // getClientSettingById(){
-  //   let clientId = parseInt(sessionStorage.getItem('ClientId'));
-  //   console.log(clientId)
-  //   this.service.getClientSettingById(clientId).subscribe((res:any)=>{
-  //       console.log("ClientSetting",res);
-  //       this.id = res.id;
-  //       this.clientSetting.latitude = res.latitude;
-  //       this.clientSetting.longitude = res.longitude;
-  //       this.clientSetting.juristicMethod = res.juristicMethod;
-  //       this.clientSetting.calculationMethod = res.calculationMethod;
-  //       this.clientSetting.currencyId = res.currency.id;
-  //       this.buttonName ="Update"
-  //   },
-  //   error=>{
-  //     console.log("Response", error.status)
-    
-  //   }
-  //   )
+  getClientSettingById(){
+    let clientId = parseInt(sessionStorage.getItem('ClientId'));
+    console.log(clientId)
+    this.service.getClientSettingById(clientId).subscribe((res:any)=>{
+        console.log("ClientSetting",res);
+        this.id = res.id;
+        this.clientSetting.latitude = res.latitude;
+        this.clientSetting.longitude = res.longitude;
+        this.clientSetting.juristicMethod = res.juristicMethod;
+        this.clientSetting.calculationMethod = res.calculationMethod;
+        this.clientSetting.currencyId = res.currency.id;
+        this.buttonName ="Update"
+    },
+    error=>{
+      console.log("Response", error.status)
+    }
+    )
 
-  // }
+  }
 
   getCurrencyList(){
     this.service.getCurrencyList().subscribe(res=>{
@@ -96,9 +97,13 @@ export class ClientSettingComponent implements OnInit {
     this.router.navigate([''])
   }
 
-  // disableFields(){
-  //   if(this.clientSetting.calculationMethod&&this.clientSetting.currencyId&&this.clientSetting.juristicMethod&&this.clientSetting.latitude&&this.clientSetting.longitude){
-  //     this.disable=false;
-  // }
+  goToPrayerTimeList(){
+    this.router.navigate(['listprayertime']);
+  }
+
+  addPrayerTime(){
+    this.router.navigate(['prayertime']);
+  }
+
 }
 

@@ -78,7 +78,7 @@ public class ClientSettingServiceImpl implements ClientSettingService {
     {
        Optional<Client> client = clientRepository.findById(id);
 
-        if(!client.isPresent()|| client.get().getIsDeleted()==0)
+        if(!client.isPresent()|| client.get().getIsDeleted()==1)
         {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
@@ -87,8 +87,6 @@ public class ClientSettingServiceImpl implements ClientSettingService {
            return client.get().getClientSetting();
 
         }
-
-
     }
 
     @Override
