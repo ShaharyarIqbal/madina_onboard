@@ -24,17 +24,15 @@ export class ClientSettingComponent implements OnInit {
   currencyList:any=[];
   buttonName = "Save";
   id;
-
+  
   ngOnInit() {
-    // this.getClientSettingById();
     this.getCurrencyList();
-
   }
 
-
+   
 
   submitClientSetting(){
-    if(!this.id){
+    
       this.clientSetting.clientId = parseInt(sessionStorage.getItem('ClientId')) ;
       console.log(this.clientSetting.clientId)
       console.log(this.clientSetting);
@@ -48,36 +46,31 @@ export class ClientSettingComponent implements OnInit {
         this.toastr.error("Something Went Wrong");
       }
       )
-    }
-    else{
-      this.service.updateClientSetting(this.id,this.clientSetting).subscribe(res=>{
-        console.log(res);
-
-      })
-    }
-
+    
+   
+   
   }
 
-  getClientSettingById(){
-    let clientId = parseInt(sessionStorage.getItem('ClientId'));
-    console.log(clientId)
-    this.service.getClientSettingById(clientId).subscribe((res:any)=>{
-        console.log("ClientSetting",res);
-        this.id = res.id;
-        this.clientSetting.latitude = res.latitude;
-        this.clientSetting.longitude = res.longitude;
-        this.clientSetting.juristicMethod = res.juristicMethod;
-        this.clientSetting.calculationMethod = res.calculationMethod;
-        this.clientSetting.currencyId = res.currency.id;
-        this.buttonName ="Update"
-    },
-    error=>{
-      console.log("Response", error.status)
+  // getClientSettingById(){
+  //   let clientId = parseInt(sessionStorage.getItem('ClientId'));
+  //   console.log(clientId)
+  //   this.service.getClientSettingById(clientId).subscribe((res:any)=>{
+  //       console.log("ClientSetting",res);
+  //       this.id = res.id;
+  //       this.clientSetting.latitude = res.latitude;
+  //       this.clientSetting.longitude = res.longitude;
+  //       this.clientSetting.juristicMethod = res.juristicMethod;
+  //       this.clientSetting.calculationMethod = res.calculationMethod;
+  //       this.clientSetting.currencyId = res.currency.id;
+  //       this.buttonName ="Update"
+  //   },
+  //   error=>{
+  //     console.log("Response", error.status)
+    
+  //   }
+  //   )
 
-    }
-    )
-
-  }
+  // }
 
   getCurrencyList(){
     this.service.getCurrencyList().subscribe(res=>{

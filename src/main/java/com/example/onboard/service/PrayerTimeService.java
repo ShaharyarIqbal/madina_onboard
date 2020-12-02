@@ -14,4 +14,6 @@ public interface PrayerTimeService {
     PrayerTime updatePrayerTime (Long id ,PrayerTimeDto prayerTimeDto);
 
     String deletePrayerTime (Long id);
+
+    PrayerTime getById(Long id);
 }

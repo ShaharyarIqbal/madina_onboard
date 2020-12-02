@@ -43,4 +43,10 @@ public class PrayerTimeController {
     {
         return prayerTimeService.deletePrayerTime(id);
     }
+
+    @GetMapping("/get/{id}")
+    public PrayerTime getById(@PathVariable("id") Long id)
+    {
+        return prayerTimeService.getById(id);
+    }
 }

@@ -1,0 +1,25 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { PrayerTimeListComponent } from './prayer-time-list.component';
+
+describe('PrayerTimeListComponent', () => {
+  let component: PrayerTimeListComponent;
+  let fixture: ComponentFixture<PrayerTimeListComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ PrayerTimeListComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(PrayerTimeListComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

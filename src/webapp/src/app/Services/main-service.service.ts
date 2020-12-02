@@ -16,8 +16,9 @@ export class MainServiceService {
   private getClientSettingURL = environment.baseUrl+"/api/v1/clientsetting/";
   private getCurrencyListURL  = environment.baseUrl+"/api/v1/currency";
   private postPrayerTimmmingsURL = environment.baseUrl+"/api/v1/prayertime/";
-  private getPrayerTimmingsByIDURL = environment.baseUrl+"/api/v1/prayertime/";
+  private getPrayerTimmingsByIdURL = environment.baseUrl+"/api/v1/prayertime/";
   private updatePrayerTimmingsURL = environment.baseUrl+"/api/v1/prayertime/";
+  private getPrayerTimeByIdURL = environment.baseUrl+"/api/v1/prayertime/get/"
 
 
   constructor(private http :HttpClient) { }
@@ -69,11 +70,19 @@ export class MainServiceService {
   }
 
   public getPrayerTimmingsById(id:any):Observable<any>{
-    return this.http.get(this.getPrayerTimmingsByIDURL+id,{headers:this.header});
+    return this.http.get(this.getPrayerTimmingsByIdURL+id,{headers:this.header});
   }
 
   public updatePrayerTimmings(id:any,prayerDetailsObject:Object):Observable<any>{
     return this.http.put(this.updatePrayerTimmingsURL+id,prayerDetailsObject,{headers:this.header});
+  }
+
+  public getPrayerById(id):Observable<any>{
+    return this.http.get(this.getPrayerTimeByIdURL+id,{headers:this.header});
+  }
+
+  public updatePrayer(id, obj):Observable<any>{
+    return this.http.put(id,obj);
   }
 }
 

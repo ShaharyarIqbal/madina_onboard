@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ClientSettingComponent } from './client-setting/client-setting.component';
 import { PrayerTimeComponent } from './prayer-time/prayer-time.component';
+import { PrayerTimeListComponent } from './prayer-time-list/prayer-time-list.component';
 
 
 
@@ -19,7 +20,8 @@ import { PrayerTimeComponent } from './prayer-time/prayer-time.component';
     LoginComponent,
     HomeComponent,
     ClientSettingComponent,
-    PrayerTimeComponent
+    PrayerTimeComponent,
+    PrayerTimeListComponent
   ],
   imports: [
     BrowserModule,

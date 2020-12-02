@@ -134,4 +134,10 @@ public class PrayerTimeServiceImpl implements PrayerTimeService {
 
 
     }
+    @Override
+    public PrayerTime getById(Long id)
+    {
+        return prayerTimeRepository.findById(id).get();
+
+    }
 }
