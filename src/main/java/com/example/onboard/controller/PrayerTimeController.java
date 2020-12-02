@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +22,7 @@ public class PrayerTimeController {
 
 
     @GetMapping("/{id}")
-    public PrayerTimeDto getPrayerTimingByClientId(@PathVariable("id") Long id)
+    public List<PrayerTime> getPrayerTimingByClientId(@PathVariable("id") Long id)
     {
       return prayerTimeService.getPrayerTimeByClientId(id);
     }

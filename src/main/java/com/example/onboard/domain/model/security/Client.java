@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -94,8 +95,9 @@ public class Client extends BaseModel {
     @JoinColumn(name = "client_setting_id", referencedColumnName = "id")
     private ClientSetting clientSetting;
 
-    @OneToOne (mappedBy = "client")
-    private PrayerTime prayerTime;
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<PrayerTime> prayerTimes;
     ;
 
 }

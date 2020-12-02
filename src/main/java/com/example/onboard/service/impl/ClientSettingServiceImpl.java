@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Slf4j
@@ -44,9 +45,11 @@ public class ClientSettingServiceImpl implements ClientSettingService {
     @Override
     public ClientSetting createClientSetting(ClientSettingDto clientSettingDto){
 
+        ClientSetting oldClientSetting = clientRepository.findById(clientSettingDto.getClientId()).get().getClientSetting();
         ClientSetting clientSetting = mapper.map(clientSettingDto, ClientSetting.class);
 
         try{
+
             Client client = clientRepository.findById(clientSettingDto.getClientId()).get();
 //            Currency currency = currencyRepository.findById().get();
 
@@ -55,6 +58,10 @@ public class ClientSettingServiceImpl implements ClientSettingService {
             currency.setId(clientSettingDto.getCurrencyId());
             clientSetting.setCurrency(currency);
             client.setClientSetting(clientSetting);
+            if(oldClientSetting!=null&&oldClientSetting.getId()!=null)
+            {
+                clientSetting.setId(oldClientSetting.getId());
+            }
             clientRepository.save(client);
             return clientSetting;
 //             return clientSettingRepository.save(clientSetting);
@@ -69,19 +76,32 @@ public class ClientSettingServiceImpl implements ClientSettingService {
     @Override
     public ClientSetting clientSettingById(Long id)
     {
-        Optional<ClientSetting>  clientSetting = clientSettingRepository.findByClientId(id);
+       Optional<Client> client = clientRepository.findById(id);
 
-        if(!clientSetting.isPresent())
+        if(!client.isPresent()|| client.get().getIsDeleted()==0)
         {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         }
-        return clientSetting.get();
+        else{
+           return client.get().getClientSetting();
+
+        }
+
+
     }
 
     @Override
     public ClientSetting updateClientSetting(Long id,ClientSettingDto clientSettingDto){
         ClientSetting clientSetting = mapper.map(clientSettingDto, ClientSetting.class);
+        Optional<Client> client = clientRepository.findById(clientSettingDto.getClientId());
+
+        if(!client.isPresent())
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+        }
+        clientSetting.setClient(client.get());
         clientSetting.setId(id);
         try{
            return clientSettingRepository.save(clientSetting);
@@ -93,6 +113,15 @@ public class ClientSettingServiceImpl implements ClientSettingService {
         }
 
     }
+    @Override
+    public  String deleteClientSetting(Long id){
+        Optional<ClientSetting> client= clientSettingRepository.findById(id);
+        if(!client.isPresent())
+        {}
+        client.get().setIsDeleted((byte)1);
+        clientSettingRepository.save(client.get());
 
+        return id.toString();
+    }
 
 }

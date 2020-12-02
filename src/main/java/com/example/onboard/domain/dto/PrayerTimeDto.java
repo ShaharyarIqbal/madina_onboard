@@ -53,6 +53,6 @@ public class PrayerTimeDto {
     @NotBlank(message = "Isha Adahaan  Time  Should Not Be Null")
     String ishaAdhaan;
 
-    @NotBlank(message = "Isha Iqamah Time  Should Not Be Null")
+        @NotBlank(message = "Isha Iqamah Time  Should Not Be Null")
     String ishaIqamah;
 }

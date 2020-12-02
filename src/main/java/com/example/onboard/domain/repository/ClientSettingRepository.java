@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface ClientSettingRepository extends JpaRepository<ClientSetting,Long> {
 
-//    @Query(value = "select * from client_setting where client_id=:id ",nativeQuery = true)
-    public Optional<ClientSetting> findByClientId(Long id);
+    @Query(value = "select * from client_setting where client_id=:id ",nativeQuery = true)
+    public Optional<ClientSetting> findByClientId(@Param("id") Long id);
 
 }

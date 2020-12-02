@@ -11,4 +11,5 @@ public interface ClientSettingService {
 
    ClientSetting updateClientSetting(Long id,ClientSettingDto clientSettingDto);
 
+    String deleteClientSetting(Long id);
 }

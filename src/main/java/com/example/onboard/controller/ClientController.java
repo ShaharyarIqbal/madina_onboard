@@ -73,6 +73,12 @@ public class ClientController {
         return clientSettingService.createClientSetting(clientSettingDto);
     }
 
+    @DeleteMapping(value = "/clientsetting/{id}")
+    public  String deleteClientSetting(@PathVariable("id") Long id)
+    {
+        return clientSettingService.deleteClientSetting(id);
+    }
+
 
 
 }

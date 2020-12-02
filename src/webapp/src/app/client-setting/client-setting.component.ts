@@ -24,14 +24,14 @@ export class ClientSettingComponent implements OnInit {
   currencyList:any=[];
   buttonName = "Save";
   id;
-  
+
   ngOnInit() {
-    this.getClientSettingById();
+    // this.getClientSettingById();
     this.getCurrencyList();
-   
+
   }
 
-   
+
 
   submitClientSetting(){
     if(!this.id){
@@ -52,10 +52,10 @@ export class ClientSettingComponent implements OnInit {
     else{
       this.service.updateClientSetting(this.id,this.clientSetting).subscribe(res=>{
         console.log(res);
-        
+
       })
     }
-   
+
   }
 
   getClientSettingById(){
@@ -73,7 +73,7 @@ export class ClientSettingComponent implements OnInit {
     },
     error=>{
       console.log("Response", error.status)
-    
+
     }
     )
 

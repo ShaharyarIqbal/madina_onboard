@@ -26,6 +26,7 @@ public class Currency extends BaseModel {
     String currency;
     Boolean isActive =true;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "currency")
     private List<ClientSetting> clientSettings;
 

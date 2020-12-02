@@ -14,4 +14,5 @@ public class ClientSettingDto {
     String calculationMethod;
     String juristicMethod;
     Long currencyId;
+    CurrencyDto currencyDto;
 }

@@ -1,6 +1,7 @@
 package com.example.onboard.domain.model;
 
 import com.example.onboard.domain.model.security.Client;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.AllArgsConstructor;
@@ -8,10 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Time;
@@ -26,11 +24,11 @@ import java.time.LocalTime;
 @Entity
 public class PrayerTime extends BaseModel {
 
-    @JsonIgnoreProperties("prayerTime")
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="client_id",referencedColumnName = "id")
-    private Client client;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="client_id",nullable = false)
+    private Client client;
 
     LocalDate date;
 
